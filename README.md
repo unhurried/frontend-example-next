@@ -2,7 +2,7 @@
 
 A simple Next.js project that serves user interface for TODO web app.
 
-<img src="./resources/screenshot.png" width=500 style="border: 1px solid">
+<kbd><img src="./resources/screenshot.png" width=500></kbd>
 
 ## Covered Features
 
