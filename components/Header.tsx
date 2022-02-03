@@ -1,20 +1,26 @@
 import * as React from 'react'
 
 import NextLink from 'next/link'
-import { Text, Link, Flex, Heading, Stack } from '@chakra-ui/react'
+import { Text, Link, Flex, Heading, Stack, Spacer } from '@chakra-ui/react'
+import LogoutControl from './LogoutControl'
 
 const Header = () => (
-    <Stack
+    <Flex
         as="nav"
-        p={4} spacing={8}
-        align="end" direction="row"
+        p={4}
         bg={"gray.700"} color={"white"}
     >
-
-        <Heading as='h1'>Next.js ToDo App</Heading>
-        <MenuItem href="/todos">List</MenuItem>
-        <MenuItem href="/todos/new">New Item</MenuItem>
-    </Stack>
+        <Stack
+            spacing={8}
+            align="end" direction="row"
+        >
+            <Heading as='h1'>Next.js ToDo App</Heading>
+            <MenuItem href="/todos">List</MenuItem>
+            <MenuItem href="/todos/new">New Item</MenuItem>
+        </Stack>
+        <Spacer />
+        <LogoutControl></LogoutControl>
+    </Flex>
 )
 export default Header
 
