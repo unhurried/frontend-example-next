@@ -10,36 +10,6 @@ const Index = () => {
     const { data } = useSession({ required: true })
     const [items, setItems] = useState<Todo[] | null>(null)
 
-    const onUpdate = (id: string) => {
-        router.push(`/todos/${id}`)
-    }
-    const onDelete = (id: string) => {
-        const api = new TodoApi(
-            new Configuration({
-                // TODO Externalize base URI for API
-                basePath: 'http://localhost:3001',
-                accessToken: data!.user.accessToken,
-            })
-        )
-        ;(async () => {
-            await api.todoControllerDelete(id)
-            fetchList();
-        })()
-    }
-
-    const fetchList = () => {
-        const api = new TodoApi(
-            new Configuration({
-                // TODO Externalize base URI for API
-                basePath: 'http://localhost:3001',
-                accessToken: data!.user.accessToken,
-            })
-        )
-        ;(async () => {
-            setItems((await api.todoControllerGetList()).data.items)
-        })()
-    }
-
     useEffect(() => {
         if (!data) return;
 
@@ -48,7 +18,7 @@ const Index = () => {
                 new Configuration({
                     // TODO Externalize base URI for API
                     basePath: 'http://localhost:3001',
-                    accessToken: data.user.accessToken,
+                    accessToken: data.accessToken,
                 })
             )
                 ; (async () => {
@@ -56,6 +26,35 @@ const Index = () => {
                 })()
         }
     }, [data, items])
+
+    const onUpdate = (id: string) => {
+        router.push(`/todos/${id}`)
+    }
+    const onDelete = (id: string) => {
+        const api = new TodoApi(
+            new Configuration({
+                // TODO Externalize base URI for API
+                basePath: 'http://localhost:3001',
+                accessToken: data.accessToken,
+            })
+        )
+        ;(async () => {
+            await api.todoControllerDelete(id)
+            fetchList();
+        })()
+    }
+    const fetchList = () => {
+        const api = new TodoApi(
+            new Configuration({
+                // TODO Externalize base URI for API
+                basePath: 'http://localhost:3001',
+                accessToken: data.accessToken,
+            })
+        )
+        ;(async () => {
+            setItems((await api.todoControllerGetList()).data.items)
+        })()
+    }
 
     if (!data || !items) return <>Loading ...</>
 
