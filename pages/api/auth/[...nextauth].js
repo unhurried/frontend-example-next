@@ -54,7 +54,7 @@ export default NextAuth({
                 return {
                     sub: token.sub,
                     accessToken: account.access_token,
-                    accessTokenExpires: (account.expires_at - 10)  * 1000,
+                    accessTokenExpires: (account.expires_at - 10) * 1000,
                     refreshToken: account.refresh_token,
                     idToken: account.id_token,
                 }
@@ -75,16 +75,16 @@ export default NextAuth({
             session.idToken = token.idToken
             return session
         },
-        redirect: ({ url }) => {
-            return url
+        // Called when a redirect happens to verify the destination of the redirect.
+        redirect: ({ url, baseUrl }) => {
+            // Allow redirects only to this app or IDP.
+            const baseUrlForIdp = "http://localhsot:3000"
+            if (url.startsWith(baseUrl) || url.startsWith(baseUrlForIdp)) {
+                return url
+            } else {
+                return baseUrl
+            }
         }
     },
-    /*
-    callbacks: {
-        redirect({ url }) {
-            return url
-        }
-    },
-    */
-    secret: process.env.SECRET
+    secret: process.env.SECRET,
 })
