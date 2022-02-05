@@ -22,7 +22,7 @@ export default function FormikExample() {
                 new Configuration({
                     // TODO Externalize base URI for API
                     basePath: 'http://localhost:3001',
-                    accessToken: data.user.accessToken,
+                    accessToken: data.accessToken,
                 })
             )
            
@@ -39,7 +39,7 @@ export default function FormikExample() {
             new Configuration({
                 // TODO Externalize base URI for API
                 basePath: 'http://localhost:3001',
-                accessToken: data.user.accessToken,
+                accessToken: data.accessToken,
             })
         )
         await api.todoControllerUpdate(id, values)

@@ -22,7 +22,7 @@ export default function FormikExample() {
             new Configuration({
                 // TODO Externalize base URI for API
                 basePath: 'http://localhost:3001',
-                accessToken: data.user.accessToken,
+                accessToken: data.accessToken,
             })
         )
         const id = await (await api.todoControllerPost(values)).data.id

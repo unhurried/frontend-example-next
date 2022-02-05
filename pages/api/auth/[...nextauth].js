@@ -22,7 +22,6 @@ async function refreshAccessToken(token) {
     token.accessToken = resBody.access_token
     token.accessTokenExpires = Date.now() + (resBody.expires_in - 30) * 1000
     token.refreshToken = resBody.refresh_token
-    token.user.accessToken = resBody.access_token
     return token
 }
 
@@ -53,10 +52,11 @@ export default NextAuth({
             // Embed the user object in a token.
             if (account) {
                 return {
+                    sub: token.sub,
                     accessToken: account.access_token,
                     accessTokenExpires: (account.expires_at - 10)  * 1000,
                     refreshToken: account.refresh_token,
-                    user,
+                    idToken: account.id_token,
                 }
             }
 
@@ -69,10 +69,22 @@ export default NextAuth({
         },
         // Called whtn the session status is checked.
         session: async ({ session, token }) => {
-            // Copy the user object in the session.
-            session.user = token.user
+            // Copy necessary parts of the token object to the session object.
+            session.sub = token.sub
+            session.accessToken = token.accessToken
+            session.idToken = token.idToken
             return session
+        },
+        redirect: ({ url }) => {
+            return url
         }
     },
+    /*
+    callbacks: {
+        redirect({ url }) {
+            return url
+        }
+    },
+    */
     secret: process.env.SECRET
 })
