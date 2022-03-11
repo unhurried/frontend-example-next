@@ -12,6 +12,21 @@ A simple Next.js project that serves user interface for TODO web app.
 
 ## How to start development
 
+### Start the backend server for development
+
+Clone fullstack-example/backend" repository and run the following commands.
+
+```shell
+# Install dependencies
+npm install
+
+# Start OIDC provider
+npm run oidc-provider
+
+# Start the backend server  * need to be done in a new console.
+npm run start:dev
+```
+
 ### Install dependencies
 
 ```shell
@@ -27,7 +42,7 @@ npm run dev
 ### Run the application in the production mode
 
 ```shell
-npm run dev
+npm run start
 ```
 
 ### Compile and minify for production

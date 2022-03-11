@@ -78,7 +78,7 @@ export default NextAuth({
         // Called when a redirect happens to verify the destination of the redirect.
         redirect: ({ url, baseUrl }) => {
             // Allow redirects only to this app or IDP.
-            const baseUrlForIdp = "http://localhsot:3000"
+            const baseUrlForIdp = "http://localhost:3002"
             if (url.startsWith(baseUrl) || url.startsWith(baseUrlForIdp)) {
                 return url
             } else {
