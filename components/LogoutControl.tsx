@@ -1,13 +1,14 @@
 import * as React from 'react'
 
 import { IconButton, Menu, MenuButton, MenuItem, MenuList, MenuGroup } from '@chakra-ui/react'
-import { signOut, useSession } from 'next-auth/react'
+import { getProviders, signOut, useSession } from 'next-auth/react'
 import { MdAccountCircle, MdLogout } from 'react-icons/md'
 
 const LogoutControl = () => {
     const { data } = useSession({ required: true })
     const onSignOut = async () => {
-        const url = new URL("http://localhost:3002/session/end")
+        console.log(process.env.OIDC_END_SESSION_EP)
+        const url = new URL(process.env.NEXT_PUBLIC_OIDC_END_SESSION_EP!)
         url.searchParams.append("id_token_hint", data!.idToken)
         url.searchParams.append("post_logout_redirect_uri", "http://localhost:3000")
         signOut({ callbackUrl: url.toString() })

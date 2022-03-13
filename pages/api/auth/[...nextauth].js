@@ -1,7 +1,7 @@
 import NextAuth from "next-auth"
 
 async function refreshAccessToken(token) {
-    const url = 'http://localhost:3002/token'
+    const url = process.env.OIDC_TOKEN_EP
     const body = new URLSearchParams({
         grant_type: 'refresh_token',
         client_id: 'client_id_for_web',
@@ -31,7 +31,7 @@ export default NextAuth({
         name: "oidc",
         type: "oauth",
         idToken: true,
-        wellKnown: "http://localhost:3002/.well-known/openid-configuration",
+        wellKnown: process.env.OIDC_CONFIGURATION_EP,
         checks: ["pkce", "state"],
         clientId: "client_id_for_web",
         clientSecret: "client_secret_for_web",
@@ -78,7 +78,7 @@ export default NextAuth({
         // Called when a redirect happens to verify the destination of the redirect.
         redirect: ({ url, baseUrl }) => {
             // Allow redirects only to this app or IDP.
-            const baseUrlForIdp = "http://localhost:3002"
+            const baseUrlForIdp = process.env.OIDC_BASE_URI
             if (url.startsWith(baseUrl) || url.startsWith(baseUrlForIdp)) {
                 return url
             } else {
