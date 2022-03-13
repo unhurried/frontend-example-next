@@ -16,8 +16,7 @@ const Index = () => {
         if (!items) {
             const api = new TodoApi(
                 new Configuration({
-                    // TODO Externalize base URI for API
-                    basePath: 'http://localhost:3001',
+                    basePath: process.env.NEXT_PUBLIC_TODO_API_URL,
                     accessToken: data.accessToken,
                 })
             )
@@ -33,9 +32,8 @@ const Index = () => {
     const onDelete = (id: string) => {
         const api = new TodoApi(
             new Configuration({
-                // TODO Externalize base URI for API
-                basePath: 'http://localhost:3001',
-                accessToken: data.accessToken,
+                basePath: process.env.NEXT_PUBLIC_TODO_API_URL,
+                accessToken: data!.accessToken,
             })
         )
         ;(async () => {
@@ -46,9 +44,8 @@ const Index = () => {
     const fetchList = () => {
         const api = new TodoApi(
             new Configuration({
-                // TODO Externalize base URI for API
-                basePath: 'http://localhost:3001',
-                accessToken: data.accessToken,
+                basePath: process.env.NEXT_PUBLIC_TODO_API_URL,
+                accessToken: data!.accessToken,
             })
         )
         ;(async () => {

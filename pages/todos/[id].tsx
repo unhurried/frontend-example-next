@@ -20,8 +20,7 @@ export default function FormikExample() {
         if (!item) {
             const api = new TodoApi(
                 new Configuration({
-                    // TODO Externalize base URI for API
-                    basePath: 'http://localhost:3001',
+                    basePath: process.env.NEXT_PUBLIC_TODO_API_URL,
                     accessToken: data.accessToken,
                 })
             )
@@ -37,8 +36,7 @@ export default function FormikExample() {
     const onSubmit: FormikConfig<Todo>['onSubmit'] = async (values, actions) => {
         const api = new TodoApi(
             new Configuration({
-                // TODO Externalize base URI for API
-                basePath: 'http://localhost:3001',
+                basePath: process.env.NEXT_PUBLIC_TODO_API_URL,
                 accessToken: data.accessToken,
             })
         )
