@@ -22,8 +22,8 @@ const List = ({ items, onUpdate, onDelete}: Props) => (
             <Tbody>
                 {items.map((item) =>
                     <Tr key={item.id}>
-                        <Td>{item.title}</Td>
                         <Td>{item.category}</Td>
+                        <Td>{item.title}</Td>
                         <Td>
                             <Button size='sm' colorScheme='blue' right='2' onClick={() => onUpdate(item.id!)}>Update</Button>
                             <Button size='sm' colorScheme='red' onClick={() => onDelete(item.id!)}>Delete</Button>
