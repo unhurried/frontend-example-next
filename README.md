@@ -8,6 +8,7 @@ A simple Next.js project that serves user interface for TODO web app.
 
 * Functional components with Typescript
 * UI components with Chakra UI
+* UI components development with Storybook
 * User and API authentication with NextAuth.js working with an OpenID Connect (OAuth 2.0) provider.
 
 ## How to start development
@@ -31,6 +32,12 @@ npm run start:dev
 
 ```shell
 npm install
+```
+
+### Run storybook
+
+```shell
+npm run storybook
 ```
 
 ### Run the application in the development mode
