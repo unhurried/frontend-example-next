@@ -1,16 +1,11 @@
 import { Stack } from "@chakra-ui/react"
 import { Form, Formik, FormikConfig } from "formik"
 import { InputControl, SelectControl, SubmitButton, TextareaControl } from "formik-chakra-ui"
-
-interface Values {
-    title: string
-    category: string
-    content: string
-}
+import { Todo } from "../client-axios"
 
 type Props = {
-    initialValues: { title: string, category: string, content: string }
-    onSubmit: FormikConfig<Values>['onSubmit']
+    initialValues: Todo
+    onSubmit: FormikConfig<Todo>['onSubmit']
 }
 
 const FormComponent = ({ initialValues, onSubmit }: Props) => (
@@ -21,9 +16,9 @@ const FormComponent = ({ initialValues, onSubmit }: Props) => (
             <Stack spacing={3}>
                 <InputControl id="title" name="title" label="Title" />
                 <SelectControl id='category' name='category' label='Category'>
-                    <option value='One'>One</option>
-                    <option value='Two'>Two</option>
-                    <option value='Three'>Three</option>
+                    <option value='one'>One</option>
+                    <option value='two'>Two</option>
+                    <option value='three'>Three</option>
                 </SelectControl>
                 <TextareaControl id="content" name='content' label='Content'></TextareaControl>
                 <SubmitButton>Submit</SubmitButton>

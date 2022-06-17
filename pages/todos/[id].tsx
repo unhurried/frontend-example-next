@@ -1,11 +1,11 @@
-import { Stack, useToast } from "@chakra-ui/react"
-import { Formik, Form, FormikConfig } from "formik"
-import { InputControl, SelectControl, SubmitButton, TextareaControl } from "formik-chakra-ui"
+import { useToast } from "@chakra-ui/react"
+import { FormikConfig } from "formik"
 import { useSession } from "next-auth/react"
 import { useRouter } from "next/router"
 import { useEffect, useState } from "react"
 import { Configuration, Todo, TodoApi } from "../../client-axios"
 import PageHeader from "../../components/PageHeader"
+import Form from "../../components/Form"
 
 export default function FormikExample() {
     const router = useRouter()
@@ -47,23 +47,10 @@ export default function FormikExample() {
     return (
         <>
             <PageHeader router={router} buttons={[{ title: 'Back to List', href: '/todos' }]}>Update</PageHeader>
-            <Formik
+            <Form
                 initialValues={item}
                 onSubmit={onSubmit}
-            >
-                <Form>
-                    <Stack spacing={3}>
-                        <InputControl id="title" name="title" label="Title" />
-                        <SelectControl id='category' name='category' label='Category'>
-                            <option value='one'>One</option>
-                            <option value='two'>Two</option>
-                            <option value='three'>Three</option>
-                        </SelectControl>
-                        <TextareaControl id="content" name='content' label='Content'></TextareaControl>
-                        <SubmitButton>Submit</SubmitButton>
-                    </Stack>
-                </Form>
-            </Formik>
+            />
         </>
     )
 }
