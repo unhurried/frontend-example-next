@@ -12,8 +12,8 @@ type Props = {
 const PageHeader = ({ children, router, buttons }: Props) => (
     <Flex justifyContent="space-between" mb={3}>
         <Heading as='h2'>{children}</Heading>
-        {buttons?.map(({ title, href }) =>
-            <Button onClick={() => { router?.push(href) }}>{title}</Button>
+        {buttons?.map(({ title, href }, index) =>
+            <Button key={index} onClick={() => { router?.push(href) }}>{title}</Button>
         )}
     </Flex>
 )
