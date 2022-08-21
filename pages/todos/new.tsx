@@ -25,7 +25,7 @@ export default function FormikExample() {
         <>
             <PageHeader router={router} buttons={[{ title: 'Back to List', href: '/todos' }]}>Create</PageHeader>
             <Form
-                initialValues={{ title: 'aa', category: TodoCategoryEnum.One, content: 'bb' }}
+                initialValues={{ title: '', category: TodoCategoryEnum.One, content: '' }}
                 onSubmit={onSubmit}
             />
         </>
