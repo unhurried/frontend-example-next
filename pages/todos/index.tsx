@@ -1,64 +1,32 @@
-import { Configuration, Todo, TodoApi } from '../../client-axios';
 import List from '../../components/List';
-import { useSession } from 'next-auth/react';
-import { useEffect, useState } from 'react';
 import { useRouter } from 'next/router';
 import PageHeader from '../../components/PageHeader';
+import { useSWRConfig } from 'swr';
+import { useTodoApi, useTodoList } from '../../hooks/todo_hooks';
 
 const Index = () => {
     const router = useRouter()
-    const { data } = useSession({ required: true })
-    const [items, setItems] = useState<Todo[] | null>(null)
+    const { data: todoItems, error } = useTodoList()
+    const todoApi = useTodoApi()
+    const { mutate } = useSWRConfig()
 
-    useEffect(() => {
-        if (!data) return;
-
-        if (!items) {
-            const api = new TodoApi(
-                new Configuration({
-                    basePath: process.env.NEXT_PUBLIC_TODO_API_URL,
-                    accessToken: data.accessToken,
-                })
-            )
-                ; (async () => {
-                    setItems((await api.todoControllerGetList()).data.items)
-                })()
-        }
-    }, [data, items])
+    if (error) return <>Something wrong happend.</>
+    if (!todoApi || !todoItems) return <>Loading ...</>
 
     const onUpdate = (id: string) => {
         router.push(`/todos/${id}`)
     }
     const onDelete = (id: string) => {
-        const api = new TodoApi(
-            new Configuration({
-                basePath: process.env.NEXT_PUBLIC_TODO_API_URL,
-                accessToken: data!.accessToken,
-            })
-        )
-        ;(async () => {
-            await api.todoControllerDelete(id)
-            fetchList();
+        (async () => {
+            await todoApi.todoControllerDelete(id)
+            mutate('todo_list')
         })()
     }
-    const fetchList = () => {
-        const api = new TodoApi(
-            new Configuration({
-                basePath: process.env.NEXT_PUBLIC_TODO_API_URL,
-                accessToken: data!.accessToken,
-            })
-        )
-        ;(async () => {
-            setItems((await api.todoControllerGetList()).data.items)
-        })()
-    }
-
-    if (!data || !items) return <>Loading ...</>
 
     return (
         <>
             <PageHeader router={router} buttons={[{ title: 'New Item', href: '/todos/new' }]}>List</PageHeader>
-            <List items={items} onUpdate={onUpdate} onDelete={onDelete}></List>
+            <List items={todoItems!} onUpdate={onUpdate} onDelete={onDelete}></List>
         </>
     )
 }
