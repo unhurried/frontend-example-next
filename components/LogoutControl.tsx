@@ -1,7 +1,7 @@
 import * as React from 'react'
 
 import { IconButton, Menu, MenuButton, MenuItem, MenuList, MenuGroup } from '@chakra-ui/react'
-import { getProviders, signOut, useSession } from 'next-auth/react'
+import { signOut, useSession } from 'next-auth/react'
 import { MdAccountCircle, MdLogout } from 'react-icons/md'
 
 const LogoutControl = () => {
