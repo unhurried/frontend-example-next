@@ -1,14 +1,14 @@
 import { ComponentMeta, ComponentStory } from "@storybook/react"
-import MenuForMobile from "./MenuForMobile";
+import MenuForMobileComponent from "./MenuForMobile";
 
 export default {
     title: 'Todo/MenuForMobile',
-    component: MenuForMobile,
-} as ComponentMeta<typeof MenuForMobile>;
+    component: MenuForMobileComponent,
+} as ComponentMeta<typeof MenuForMobileComponent>;
 
-const Template: ComponentStory<typeof MenuForMobile> = (args) => <MenuForMobile {...args}/>;
-export const Form = Template.bind({});
-Form.args = {
+const Template: ComponentStory<typeof MenuForMobileComponent> = (args) => <MenuForMobileComponent {...args}/>;
+export const MenuForMobile = Template.bind({});
+MenuForMobile.args = {
     username: "johnsmith",
     links: [{ text: "My Account", href: "/" }],
 }

@@ -5,10 +5,14 @@ import { Text, Link, Flex, Heading, Stack, Spacer } from '@chakra-ui/react'
 import { signOut, useSession } from 'next-auth/react'
 import LogoutControl from './LogoutControl'
 import MenuForMobile from './MenuForMobile'
+import MenuForDesktop from './MenuForDesktop'
 
 const Header = () => {
     const { data } = useSession({ required: true })
-    const onSignOut = async () => {
+
+    const username = data ? data.sub : "Loading ..."
+    const links = [{ text: "List", href: "/todos" }, { text: "New Item", href: "/todos/new" }]
+    const onLogout = async () => {
         console.log(process.env.OIDC_END_SESSION_EP)
         const url = new URL(process.env.NEXT_PUBLIC_OIDC_END_SESSION_EP!)
         url.searchParams.append("id_token_hint", data!.idToken)
@@ -24,18 +28,11 @@ const Header = () => {
         >
             <Heading as='h1' whiteSpace='nowrap' mr='10'>Next.js ToDo App</Heading>
             <Flex w='100%' display={['none', 'none', 'flex']}>
-                <Stack
-                    spacing={8}
-                    align="end" direction="row"
-                >
-                    <MenuItem href="/todos">List</MenuItem>
-                    <MenuItem href="/todos/new">New Item</MenuItem>
-                </Stack>
-                <Spacer />
+                <MenuForDesktop links={links}></MenuForDesktop>
+               <Spacer />
                 <LogoutControl
-                
                     username={data ? data.sub : "Loading ..."}
-                    onLogout={onSignOut}
+                    onLogout={onLogout}
                 ></LogoutControl>
             </Flex>
             <Flex w='100%' display={['flex', 'flex', 'none']}>
@@ -43,22 +40,10 @@ const Header = () => {
                 <MenuForMobile
                     username={data ? data.sub : "Loading ..."}
                     links={[{ text: "List", href: "/todos" }, { text: "New Item", href: "/todos/new" }]}
-                    onLogout={onSignOut}
+                    onLogout={onLogout}
                 ></MenuForMobile>
             </Flex>
         </Flex>
     )
 }
 export default Header
-
-const MenuItem = ({ href = "/", children }: { href: string, children: React.ReactNode }) => {
-    return (
-        <NextLink href={href} passHref>
-            <Link>
-                <Text display="block">
-                    {children}
-                </Text>
-            </Link>
-        </NextLink>
-    )
-}
