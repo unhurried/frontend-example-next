@@ -17,32 +17,36 @@ const Header = () => {
     }
 
     return (
-    <Flex
-        as="nav"
-        p={4}
-        bg={"gray.700"} color={"white"}
-    >
-        <Heading as='h1' whiteSpace='nowrap' mr='10'>Next.js ToDo App</Heading>
-        <Flex w='100%' display={['none', 'none', 'flex']}>
-            <Stack
-                spacing={8}
-                align="end" direction="row"
-            >
-                <MenuItem href="/todos">List</MenuItem>
-                <MenuItem href="/todos/new">New Item</MenuItem>
-            </Stack>
-            <Spacer />
-            <LogoutControl></LogoutControl>
+        <Flex
+            as="nav"
+            p={4}
+            bg={"gray.700"} color={"white"}
+        >
+            <Heading as='h1' whiteSpace='nowrap' mr='10'>Next.js ToDo App</Heading>
+            <Flex w='100%' display={['none', 'none', 'flex']}>
+                <Stack
+                    spacing={8}
+                    align="end" direction="row"
+                >
+                    <MenuItem href="/todos">List</MenuItem>
+                    <MenuItem href="/todos/new">New Item</MenuItem>
+                </Stack>
+                <Spacer />
+                <LogoutControl
+                
+                    username={data ? data.sub : "Loading ..."}
+                    onLogout={onSignOut}
+                ></LogoutControl>
+            </Flex>
+            <Flex w='100%' display={['flex', 'flex', 'none']}>
+                <Spacer />
+                <MenuForMobile
+                    username={data ? data.sub : "Loading ..."}
+                    links={[{ text: "List", href: "/todos" }, { text: "New Item", href: "/todos/new" }]}
+                    onLogout={onSignOut}
+                ></MenuForMobile>
+            </Flex>
         </Flex>
-        <Flex w='100%' display={['flex', 'flex', 'none']}>
-            <Spacer />
-            <MenuForMobile
-                username={data? data.sub : "Loading ..."}
-                links={[{ text: "List", href: "/todos" }, { text: "New Item", href: "/todos/new" }]}
-                onLogout={onSignOut}
-            ></MenuForMobile>
-        </Flex>
-    </Flex>
     )
 }
 export default Header
