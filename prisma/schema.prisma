@@ -15,4 +15,5 @@ model Todo {
   title String
   category String
   content String?
+  userId String
 }
