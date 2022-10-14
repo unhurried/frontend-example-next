@@ -1,33 +1,33 @@
 import { useToast } from "@chakra-ui/react"
 import { FormikConfig } from "formik"
 import { useRouter } from "next/router"
-import { useEffect, useState } from "react"
-import { Todo } from "../../client-axios"
 import PageHeader from "../../components/PageHeader"
-import Form from "../../components/Form"
-import { useTodoApi } from "../../hooks/todo_hooks"
+import Form, { TodoForm } from "../../components/Form"
+import { trpc } from "../../utils/trpc"
 
 export default function FormikExample() {
     const router = useRouter()
     const id = router.query.id as string
-    const todoApi = useTodoApi()
-    const [item, setItem] = useState<Todo | null>(null)
-    const toast = useToast();
+    const todoQuery = trpc.useQuery(["todo.get", id])
+    const todoMutation = trpc.useMutation(["todo.update"])
+    const toast = useToast()
 
-    useEffect(() => {
-        if (!todoApi) return;
+    if (!todoQuery.data) return <>Loading ...</>
 
-        if (!item) {
-            (async () => {
-                setItem((await todoApi.todoControllerGet(id)).data)
-            })()
-        }
-    }, [id, item, todoApi])
+    const initialValues = {
+        title: todoQuery.data.title,
+        category: todoQuery.data.category,
+        content: todoQuery.data.content? todoQuery.data.content : "",
+    }
 
-    if (!item) return <>Loading ...</>
-
-    const onSubmit: FormikConfig<Todo>['onSubmit'] = async (values, actions) => {
-        await todoApi?.todoControllerUpdate(id, values)
+    const onSubmit: FormikConfig<TodoForm>['onSubmit'] = async (values, actions) => {
+        await todoMutation.mutateAsync({
+            id,
+            title: values.title,
+            category: values.category,
+            content: values.content,
+        })
+        todoQuery.refetch()
         toast({ title: "Update succeeded." })
     }
 
@@ -35,7 +35,7 @@ export default function FormikExample() {
         <>
             <PageHeader router={router} buttons={[{ title: 'Back to List', href: '/todos' }]}>Update</PageHeader>
             <Form
-                initialValues={item}
+                initialValues={initialValues}
                 onSubmit={onSubmit}
             />
         </>

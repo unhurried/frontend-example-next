@@ -18,7 +18,7 @@ export const todoRouter = createProtectedRouter()
     input: z.object({
       title: z.string(),
       category: z.string(),
-      content: z.string(),
+      content: z.string().optional(),
     }),
     async resolve({ input, ctx }) {
       return prisma.todo.create({ data: { ...input, userId: ctx.session.sub } })
@@ -29,7 +29,7 @@ export const todoRouter = createProtectedRouter()
       id: z.string(),
       title: z.string(),
       category: z.string(),
-      content: z.string(),
+      content: z.string().optional(),
     }),
     async resolve({ input, ctx }) {
       return prisma.todo.updateMany({
