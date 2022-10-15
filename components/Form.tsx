@@ -1,11 +1,16 @@
 import { Stack } from "@chakra-ui/react"
 import { Form, Formik, FormikConfig } from "formik"
 import { InputControl, SelectControl, SubmitButton, TextareaControl } from "formik-chakra-ui"
-import { Todo } from "../client-axios"
+
+export type TodoForm = {
+    title: string
+    category: string
+    content: string
+}
 
 type Props = {
-    initialValues: Todo
-    onSubmit: FormikConfig<Todo>['onSubmit']
+    initialValues: TodoForm
+    onSubmit: FormikConfig<TodoForm>['onSubmit']
 }
 
 const FormComponent = ({ initialValues, onSubmit }: Props) => (

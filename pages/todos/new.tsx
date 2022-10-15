@@ -1,25 +1,23 @@
 import { useRouter } from "next/router"
-import { Todo, TodoCategoryEnum } from "../../client-axios"
 import PageHeader from "../../components/PageHeader"
-import Form from "../../components/Form"
+import Form, { TodoForm } from "../../components/Form"
 import { FormikConfig } from "formik"
-import { useTodoApi } from "../../hooks/todo_hooks"
+import { trpc } from "../../utils/trpc"
 
 export default function FormikExample() {
     const router = useRouter()
-    const todoApi = useTodoApi()
-    if (!todoApi) return <>loading</>
+    const todoCreate = trpc.useMutation(["todo.create"])
 
-    const onSubmit: FormikConfig<Todo>['onSubmit'] = async (values, actions) => {
-        const id = (await todoApi.todoControllerPost(values)).data.id
-        router.push(`/todos/${id}`)
+    const onSubmit: FormikConfig<TodoForm>['onSubmit'] = async (values) => {
+        const result = await todoCreate.mutateAsync({ title: values.title, category: values.category, content: values.content })
+        router.push(`/todos/${result.id}`)
     }
 
     return (
         <>
             <PageHeader router={router} buttons={[{ title: 'Back to List', href: '/todos' }]}>Create</PageHeader>
             <Form
-                initialValues={{ title: '', category: TodoCategoryEnum.One, content: '' }}
+                initialValues={{ title: '', category: 'one', content: '' }}
                 onSubmit={onSubmit}
             />
         </>
