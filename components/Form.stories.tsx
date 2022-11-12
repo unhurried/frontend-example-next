@@ -17,6 +17,7 @@ const Template: ComponentStory<typeof FormComponent> = (args) => <FormComponent 
 export const Form = Template.bind({});
 Form.args = {
     initialValues: {
+        id: "dummy",
         title: "Buy milk after work",
         category: TodoCategoryEnum.One,
         content: "Remember to buy milk at the grocery store on the way home."

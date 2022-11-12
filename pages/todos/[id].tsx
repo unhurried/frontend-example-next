@@ -15,6 +15,7 @@ export default function FormikExample() {
     if (!todoQuery.data) return <>Loading ...</>
 
     const initialValues = {
+        id: todoQuery.data.id,
         title: todoQuery.data.title,
         category: todoQuery.data.category,
         content: todoQuery.data.content? todoQuery.data.content : "",

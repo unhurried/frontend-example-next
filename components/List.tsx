@@ -1,10 +1,11 @@
 import * as React from 'react'
-import { Todo } from '../client-axios'
 
 import { Table, Thead, Tbody, Tr, Th, Td, chakra, TableCaption, Tfoot, Button } from '@chakra-ui/react'
+import { Todo } from '@prisma/client'
+import { TodoForm } from './Form'
 
 type Props = {
-    items: Todo[]
+    items: TodoForm[]
     onUpdate: (id: string) => void
     onDelete: (id: string) => void
 }

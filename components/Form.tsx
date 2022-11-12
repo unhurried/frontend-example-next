@@ -3,6 +3,7 @@ import { Form, Formik, FormikConfig } from "formik"
 import { InputControl, SelectControl, SubmitButton, TextareaControl } from "formik-chakra-ui"
 
 export type TodoForm = {
+    id?: string
     title: string
     category: string
     content: string
