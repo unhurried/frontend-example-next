@@ -11,7 +11,7 @@ import superjson from "superjson";
 import { httpBatchLink } from "@trpc/client/links/httpBatchLink";
 import { loggerLink } from "@trpc/client/links/loggerLink";
 import { withTRPC } from "@trpc/next";
-import type { AppRouter } from "../server/router";
+import type { AppRouter } from "../server/trpc/router";
 
 type NextPageWithLayout = NextPage & {
   getLayout?: (page: ReactElement) => ReactNode

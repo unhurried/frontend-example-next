@@ -8,8 +8,8 @@ import { trpc } from "../../utils/trpc"
 export default function FormikExample() {
     const router = useRouter()
     const id = router.query.id as string
-    const todoQuery = trpc.useQuery(["todo.get", id])
-    const todoMutation = trpc.useMutation(["todo.update"])
+    const todoQuery = trpc.todo.get.useQuery(id)
+    const todoMutation = trpc.todo.update.useMutation()
     const toast = useToast()
 
     if (!todoQuery.data) return <>Loading ...</>
