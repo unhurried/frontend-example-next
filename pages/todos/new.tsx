@@ -6,7 +6,7 @@ import { trpc } from "../../utils/trpc"
 
 export default function FormikExample() {
     const router = useRouter()
-    const todoCreate = trpc.useMutation(["todo.create"])
+    const todoCreate = trpc.todo.create.useMutation()
 
     const onSubmit: FormikConfig<TodoForm>['onSubmit'] = async (values) => {
         const result = await todoCreate.mutateAsync({ title: values.title, category: values.category, content: values.content })

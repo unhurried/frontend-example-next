@@ -6,8 +6,8 @@ import { TodoForm } from '../../components/Form';
 
 const Index = () => {
     const router = useRouter()
-    const todoQuery = trpc.useQuery(["todo.getList"])
-    const todoMutation = trpc.useMutation(["todo.delete"])
+    const todoQuery = trpc.todo.getList.useQuery()
+    const todoMutation = trpc.todo.delete.useMutation()
 
     if (todoQuery.isError) return <>Something wrong happend.</>
     if (!todoQuery.data) return <>Loading ...</>
