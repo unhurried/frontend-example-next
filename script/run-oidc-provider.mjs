@@ -1,6 +1,7 @@
-import { Provider, Configuration } from 'oidc-provider'
+// @ts-check
+import Provider from 'oidc-provider'
 
-const configuration: Configuration = {
+const configuration = {
   formats: { customizers: {
     jwt: async (ctx, token, parts) => { 
       parts.header = { typ: "JWT" }
