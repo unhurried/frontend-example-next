@@ -3,6 +3,7 @@ import { useRouter } from 'next/router';
 import PageHeader from '../../components/PageHeader';
 import { trpc } from '../../utils/trpc';
 import { TodoForm } from '../../components/Form';
+import type { Todo } from '@prisma/client';
 
 const Index = () => {
     const router = useRouter()
@@ -12,7 +13,7 @@ const Index = () => {
     if (todoQuery.isError) return <>Something wrong happend.</>
     if (!todoQuery.data) return <>Loading ...</>
 
-    const todoItems: TodoForm[] = todoQuery.data.map<TodoForm>((item: any) => {
+    const todoItems: TodoForm[] = todoQuery.data.map<TodoForm>((item: Todo) => {
         return {
             id: item.id,
             title: item.title,
