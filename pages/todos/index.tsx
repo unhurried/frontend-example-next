@@ -12,7 +12,7 @@ const Index = () => {
     if (todoQuery.isError) return <>Something wrong happend.</>
     if (!todoQuery.data) return <>Loading ...</>
 
-    const todoItems: TodoForm[] = todoQuery.data.map<TodoForm>(item => {
+    const todoItems: TodoForm[] = todoQuery.data.map<TodoForm>((item: any) => {
         return {
             id: item.id,
             title: item.title,

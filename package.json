@@ -7,17 +7,18 @@
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
-    "storybook": "start-storybook -p 6006",
-    "build-storybook": "build-storybook",
+    "storybook": "storybook dev -p 6006",
+    "build-storybook": "storybook build",
     "oidc-provider": "node script/run-oidc-provider.mjs"
   },
   "dependencies": {
     "@chakra-ui/icons": "^2.2.4",
     "@chakra-ui/react": "^2.10.9",
-    "@chakra-ui/storybook-addon": "^5.2.7",
+    "@chakra-ui/storybook-addon": "4.0.16",
     "@emotion/react": "^11.14.0",
     "@emotion/styled": "^11.14.1",
     "@prisma/client": "^5.22.0",
+    "@tanstack/react-query": "^4.43.0",
     "@trpc/client": "^10.45.4",
     "@trpc/next": "^10.45.4",
     "@trpc/react-query": "^10.45.4",
@@ -58,6 +59,7 @@
     "eslint-plugin-storybook": "^0.6.15",
     "oidc-provider": "^8.8.1",
     "prisma": "^5.22.0",
+    "storybook": "^7.6.21",
     "typescript": "^5.9.3"
   },
   "overrides": {
