@@ -13,11 +13,23 @@ module.exports = {
   "features": {
     emotionAlias: false
   },
-  "framework": "@storybook/react",
-  "core": {
-    "builder": "@storybook/builder-webpack5"
+  "framework": {
+    "name": "@storybook/react-webpack5",
+    "options": {
+      builder: {
+        useSWC: false
+      }
+    }
   },
   "typescript": {
-    "reactDocgen": false
-  }
+    "reactDocgen": false,
+    "check": false
+  },
+  babel: async (options) => ({
+    ...options,
+    presets: [
+      ...options.presets,
+      ['@babel/preset-typescript', { allowDeclareFields: true }]
+    ]
+  })
 }
