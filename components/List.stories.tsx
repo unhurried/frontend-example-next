@@ -1,17 +1,19 @@
-import { ComponentMeta, ComponentStory } from "@storybook/react";
+import type { Meta, StoryObj } from "@storybook/react";
 import ListComponent from "./List";
 
-export default {
+const meta: Meta<typeof ListComponent> = {
     title: 'Todo/List',
     component: ListComponent,
-} as ComponentMeta<typeof ListComponent>;
+};
 
-const Template: ComponentStory<typeof ListComponent> = (args) => <ListComponent {...args} />;
+export default meta;
+type Story = StoryObj<typeof ListComponent>;
 
-export const List = Template.bind({});
-List.args = {
-    items: [
-        { id: "1", title: "Buy milk after work.", category: 'one', content: '' },
-        { id: "2", title: "Call Tom at 5 p.m.", category: 'two', content: '' },
-    ],
-}
+export const List: Story = {
+    args: {
+        items: [
+            { id: "1", title: "Buy milk after work.", category: 'one', content: '' },
+            { id: "2", title: "Call Tom at 5 p.m.", category: 'two', content: '' },
+        ],
+    }
+};

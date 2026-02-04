@@ -1,13 +1,16 @@
-import { ComponentMeta, ComponentStory } from "@storybook/react"
+import type { Meta, StoryObj } from "@storybook/react"
 import LogoutControlComponent from "./LogoutControl";
 
-export default {
+const meta: Meta<typeof LogoutControlComponent> = {
     title: 'Todo/LogoutControl',
     component: LogoutControlComponent,
-} as ComponentMeta<typeof LogoutControlComponent>;
+};
 
-const Template: ComponentStory<typeof LogoutControlComponent> = (args) => <LogoutControlComponent {...args}/>;
-export const LogoutControl = Template.bind({});
-LogoutControl.args = {
-    username: "johnsmith",
-}
+export default meta;
+type Story = StoryObj<typeof LogoutControlComponent>;
+
+export const LogoutControl: Story = {
+    args: {
+        username: "johnsmith",
+    }
+};

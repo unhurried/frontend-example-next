@@ -1,23 +1,23 @@
-module.exports = {
-  "stories": [
-    "../stories/**/*.stories.mdx",
-    "../stories/**/*.stories.@(js|jsx|ts|tsx)",
-    "../components/*.stories.@(js|jsx|ts|tsx)"
+/** @type { import('@storybook/nextjs').StorybookConfig } */
+const config = {
+  stories: [
+    "../stories/**/*.mdx",
+    "../stories/**/*.stories.@(js|jsx|mjs|ts|tsx)",
+    "../components/*.stories.@(js|jsx|mjs|ts|tsx)"
   ],
-  "addons": [
+  addons: [
     "@storybook/addon-links",
     "@storybook/addon-essentials",
     "@storybook/addon-interactions",
     "@chakra-ui/storybook-addon"
   ],
-  "features": {
-    emotionAlias: false
+  framework: {
+    name: "@storybook/nextjs",
+    options: {},
   },
-  "framework": "@storybook/react",
-  "core": {
-    "builder": "@storybook/builder-webpack5"
-  },
-  "typescript": {
-    "reactDocgen": false
+  typescript: {
+    reactDocgen: false
   }
-}
+};
+
+export default config;
