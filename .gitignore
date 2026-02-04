@@ -40,3 +40,5 @@ yarn-error.log*
 /prisma/db.sqlite
 /prisma/db.sqlite-journal
 
+# storybook
+storybook-static
