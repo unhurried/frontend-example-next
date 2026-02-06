@@ -14,7 +14,6 @@
   "dependencies": {
     "@chakra-ui/icons": "^2.2.4",
     "@chakra-ui/react": "^2.10.9",
-    "@chakra-ui/storybook-addon": "^5.2.5",
     "@emotion/react": "^11.14.0",
     "@emotion/styled": "^11.14.1",
     "@prisma/client": "^6.9.0",
@@ -39,22 +38,16 @@
     "zod": "^3.25.76"
   },
   "devDependencies": {
-    "@chromatic-com/storybook": "^3.2.4",
     "@mdx-js/react": "^3.1.1",
-    "@storybook/addon-essentials": "^8.6.14",
-    "@storybook/addon-interactions": "^8.6.14",
-    "@storybook/addon-links": "^8.6.14",
-    "@storybook/blocks": "^8.6.14",
-    "@storybook/react": "^8.6.14",
-    "@storybook/react-vite": "^8.6.14",
-    "@storybook/test": "^8.6.14",
+    "@storybook/nextjs-vite": "^10.2.7",
+    "@storybook/react": "^10.2.7",
     "@types/node": "^22.16.1",
     "@types/react": "^18.3.23",
     "eslint": "^8.57.1",
     "eslint-config-next": "^15.0.8",
     "oidc-provider": "^9.6.0",
     "prisma": "^6.9.0",
-    "storybook": "^8.6.14",
+    "storybook": "^10.2.7",
     "typescript": "^5.8.3",
     "vite": "^6.0.0"
   }

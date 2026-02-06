@@ -1,0 +1,22 @@
+[21:55:57.445] [INFO] storybook v10.2.7
+[21:55:57.847] [DEBUG] Getting package.json info for /home/runner/work/frontend-example-next/frontend-example-next/package.json...
+[21:55:58.497] [INFO] Starting...
+[21:55:58.754] [ERROR] [38;2;241;97;97mError: Build failed with 5 errors:
+node_modules/@chakra-ui/storybook-addon/dist/esm/manager.mjs:1:30: ERROR: Could not resolve "@storybook/manager-api"
+node_modules/@chakra-ui/storybook-addon/dist/esm/utils/color-mode-tool.mjs:3:27: ERROR: Could not resolve "@storybook/components"
+node_modules/@chakra-ui/storybook-addon/dist/esm/utils/color-mode-tool.mjs:4:23: ERROR: Could not resolve "@storybook/manager-api"
+node_modules/@chakra-ui/storybook-addon/dist/esm/utils/direction-tool.mjs:3:50: ERROR: Could not resolve "@storybook/manager-api"
+node_modules/@chakra-ui/storybook-addon/dist/esm/utils/direction-tool.mjs:4:27: ERROR: Could not resolve "@storybook/components"[39m
+    at failureErrorWithLog (./node_modules/esbuild/lib/main.js:1467:15)
+    at ./node_modules/esbuild/lib/main.js:926:25
+    at runOnEndCallbacks (./node_modules/esbuild/lib/main.js:1307:45)
+    at buildResponseToResult (./node_modules/esbuild/lib/main.js:924:7)
+    at ./node_modules/esbuild/lib/main.js:951:16
+    at responseCallbacks.<computed> (./node_modules/esbuild/lib/main.js:603:9)
+    at handleIncomingPacket (./node_modules/esbuild/lib/main.js:658:12)
+    at Socket.readFromStdout (./node_modules/esbuild/lib/main.js:581:7)
+    at Socket.emit (node:events:508:28)
+    at addChunk (node:internal/streams/readable:559:12)
+[21:55:58.757] [WARN] Broken build, fix the error above.
+You may need to refresh the browser.
+[21:55:58.761] [INFO] Storybook collects completely anonymous usage telemetry. We use it to shape Storybook's roadmap and prioritize features. You can learn more, including how to opt out, at https://storybook.js.org/telemetry
