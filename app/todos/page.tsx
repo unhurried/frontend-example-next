@@ -1,10 +1,12 @@
+'use client'
+
 import List from '../../components/List';
-import { useRouter } from 'next/router';
+import { useRouter } from 'next/navigation';
 import PageHeader from '../../components/PageHeader';
-import { trpc } from '../../utils/trpc';
+import { trpc } from '../trpc';
 import { TodoForm } from '../../components/Form';
 
-const Index = () => {
+export default function TodosIndexPage() {
     const router = useRouter()
     const todoQuery = trpc.todo.getList.useQuery()
     const todoMutation = trpc.todo.delete.useMutation()
@@ -38,5 +40,3 @@ const Index = () => {
         </>
     )
 }
-
-export default Index

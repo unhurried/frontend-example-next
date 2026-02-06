@@ -1,3 +1,5 @@
+'use client'
+
 import { Box } from "@chakra-ui/react"
 import { ReactNode } from "react"
 import Header from "./Header"

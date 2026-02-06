@@ -1,13 +1,16 @@
+'use client'
+
 import { useToast } from "@chakra-ui/react"
 import { FormikConfig } from "formik"
-import { useRouter } from "next/router"
-import PageHeader from "../../components/PageHeader"
-import Form, { TodoForm } from "../../components/Form"
-import { trpc } from "../../utils/trpc"
+import { useRouter, useParams } from "next/navigation"
+import PageHeader from "../../../components/PageHeader"
+import Form, { TodoForm } from "../../../components/Form"
+import { trpc } from "../../trpc"
 
-export default function FormikExample() {
+export default function TodoDetailPage() {
     const router = useRouter()
-    const id = router.query.id as string
+    const params = useParams()
+    const id = params.id as string
     const todoQuery = trpc.todo.get.useQuery(id)
     const todoMutation = trpc.todo.update.useMutation()
     const toast = useToast()

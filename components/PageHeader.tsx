@@ -1,11 +1,14 @@
 import * as React from 'react'
 
 import { Flex, Heading, Button } from '@chakra-ui/react'
-import { NextRouter } from 'next/router'
+
+type RouterLike = {
+    push: (href: string) => void
+}
 
 type Props = {
     children: string
-    router?: NextRouter
+    router?: RouterLike
     buttons?: Array<{ title: string, href: string }>
 }
 

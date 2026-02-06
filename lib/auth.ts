@@ -1,6 +1,5 @@
-import NextAuth, { NextAuthOptions } from "next-auth"
-import { JWT } from "next-auth/jwt"
-import { env } from "../../../env/server.mjs";
+import { NextAuthOptions } from "next-auth"
+import { env } from "../env/server.mjs";
 
 export const authOptions: NextAuthOptions = {
     providers: [{
@@ -57,5 +56,3 @@ export const authOptions: NextAuthOptions = {
     },
     secret: env.NEXTAUTH_SECRET,
 }
-
-export default NextAuth(authOptions)
