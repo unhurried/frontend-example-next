@@ -45,17 +45,17 @@
     "@storybook/addon-interactions": "^8.6.14",
     "@storybook/addon-links": "^8.6.14",
     "@storybook/blocks": "^8.6.14",
-    "@storybook/nextjs": "^8.6.14",
     "@storybook/react": "^8.6.14",
+    "@storybook/react-vite": "^8.6.14",
     "@storybook/test": "^8.6.14",
     "@types/node": "^22.16.1",
     "@types/react": "^18.3.23",
-    "ajv": "^8.17.1",
     "eslint": "^8.57.1",
     "eslint-config-next": "^15.0.8",
     "oidc-provider": "^9.6.0",
     "prisma": "^6.9.0",
     "storybook": "^8.6.14",
-    "typescript": "^5.8.3"
+    "typescript": "^5.8.3",
+    "vite": "^6.0.0"
   }
 }

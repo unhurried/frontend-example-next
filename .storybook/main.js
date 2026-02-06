@@ -1,4 +1,4 @@
-/** @type { import('@storybook/nextjs').StorybookConfig } */
+/** @type { import('@storybook/react-vite').StorybookConfig } */
 const config = {
   stories: [
     "../stories/**/*.mdx",
@@ -12,7 +12,7 @@ const config = {
     "@chakra-ui/storybook-addon"
   ],
   framework: {
-    name: "@storybook/nextjs",
+    name: "@storybook/react-vite",
     options: {},
   },
   typescript: {
