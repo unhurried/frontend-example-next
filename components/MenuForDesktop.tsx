@@ -9,7 +9,7 @@ type Props = {
 
 const MenuForDesktop = ({ links }: Props) => (
     <Stack
-        spacing={8}
+        gap={8}
         align="end" direction="row"
     >
         {links.map((link, index) =>

@@ -1,5 +1,7 @@
+'use client'
+
 import List from '../../components/List';
-import { useRouter } from 'next/router';
+import { useRouter } from 'next/navigation';
 import PageHeader from '../../components/PageHeader';
 import { trpc } from '../../utils/trpc';
 import { TodoForm } from '../../components/Form';
@@ -33,7 +35,7 @@ const Index = () => {
 
     return (
         <>
-            <PageHeader router={router} buttons={[{ title: 'New Item', href: '/todos/new' }]}>List</PageHeader>
+            <PageHeader onNavigate={(href) => router.push(href)} buttons={[{ title: 'New Item', href: '/todos/new' }]}>List</PageHeader>
             <List items={todoItems} onUpdate={onUpdate} onDelete={onDelete}></List>
         </>
     )

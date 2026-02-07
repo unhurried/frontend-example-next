@@ -1,16 +1,21 @@
-import { useToast } from "@chakra-ui/react"
-import { FormikConfig } from "formik"
-import { useRouter } from "next/router"
-import PageHeader from "../../components/PageHeader"
-import Form, { TodoForm } from "../../components/Form"
-import { trpc } from "../../utils/trpc"
+'use client'
 
-export default function FormikExample() {
+import { useParams } from "next/navigation"
+import { useRouter } from "next/navigation"
+import PageHeader from "../../../components/PageHeader"
+import Form, { TodoForm } from "../../../components/Form"
+import { FormikConfig } from "formik"
+import { trpc } from "../../../utils/trpc"
+import { createToaster } from "@chakra-ui/react"
+
+const toaster = createToaster({ placement: "top" })
+
+export default function EditTodo() {
     const router = useRouter()
-    const id = router.query.id as string
+    const params = useParams()
+    const id = params?.id as string
     const todoQuery = trpc.todo.get.useQuery(id)
     const todoMutation = trpc.todo.update.useMutation()
-    const toast = useToast()
 
     if (!todoQuery.data) return <>Loading ...</>
 
@@ -29,12 +34,12 @@ export default function FormikExample() {
             content: values.content,
         })
         todoQuery.refetch()
-        toast({ title: "Update succeeded." })
+        toaster.create({ title: "Update succeeded." })
     }
 
     return (
         <>
-            <PageHeader router={router} buttons={[{ title: 'Back to List', href: '/todos' }]}>Update</PageHeader>
+            <PageHeader onNavigate={(href) => router.push(href)} buttons={[{ title: 'Back to List', href: '/todos' }]}>Update</PageHeader>
             <Form
                 initialValues={initialValues}
                 onSubmit={onSubmit}

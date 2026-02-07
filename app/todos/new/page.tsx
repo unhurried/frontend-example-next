@@ -1,10 +1,12 @@
-import { useRouter } from "next/router"
-import PageHeader from "../../components/PageHeader"
-import Form, { TodoForm } from "../../components/Form"
-import { FormikConfig } from "formik"
-import { trpc } from "../../utils/trpc"
+'use client'
 
-export default function FormikExample() {
+import { useRouter } from "next/navigation"
+import PageHeader from "../../../components/PageHeader"
+import Form, { TodoForm } from "../../../components/Form"
+import { FormikConfig } from "formik"
+import { trpc } from "../../../utils/trpc"
+
+export default function CreateTodo() {
     const router = useRouter()
     const todoCreate = trpc.todo.create.useMutation()
 
@@ -15,7 +17,7 @@ export default function FormikExample() {
 
     return (
         <>
-            <PageHeader router={router} buttons={[{ title: 'Back to List', href: '/todos' }]}>Create</PageHeader>
+            <PageHeader onNavigate={(href) => router.push(href)} buttons={[{ title: 'Back to List', href: '/todos' }]}>Create</PageHeader>
             <Form
                 initialValues={{ title: '', category: 'one', content: '' }}
                 onSubmit={onSubmit}

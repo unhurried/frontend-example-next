@@ -1,14 +1,17 @@
-import { ComponentMeta, ComponentStory } from "@storybook/react"
+import type { Meta, StoryObj } from "@storybook/react"
 import MenuForMobileComponent from "./MenuForMobile";
 
-export default {
+const meta: Meta<typeof MenuForMobileComponent> = {
     title: 'Todo/MenuForMobile',
     component: MenuForMobileComponent,
-} as ComponentMeta<typeof MenuForMobileComponent>;
+};
+export default meta;
 
-const Template: ComponentStory<typeof MenuForMobileComponent> = (args) => <MenuForMobileComponent {...args}/>;
-export const MenuForMobile = Template.bind({});
-MenuForMobile.args = {
-    username: "johnsmith",
-    links: [{ text: "My Account", href: "/" }],
-}
+type Story = StoryObj<typeof MenuForMobileComponent>;
+
+export const MenuForMobile: Story = {
+    args: {
+        username: "johnsmith",
+        links: [{ text: "My Account", href: "/" }],
+    },
+};

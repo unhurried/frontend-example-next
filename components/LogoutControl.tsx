@@ -1,6 +1,6 @@
 import * as React from 'react'
 
-import { IconButton, Menu, MenuButton, MenuItem, MenuList, MenuGroup } from '@chakra-ui/react'
+import { IconButton, Menu, Text, Box } from '@chakra-ui/react'
 import { MdAccountCircle, MdLogout } from 'react-icons/md'
 
 type Props = {
@@ -9,20 +9,28 @@ type Props = {
 }
 
 const LogoutControl = ({ username, onLogout }: Props) => (
-    <Menu>
-        <MenuButton
-            as={IconButton}
-            aria-label='Account'
-            fontSize={40}
-            icon={<MdAccountCircle />}
-            isRound={true}
-            variant='unstyled'
-        />
-        <MenuList color="black">
-            <MenuGroup title={`Username: ${username}`} fontSize={16} fontWeight={'normal'}>
-                <MenuItem icon={<MdLogout />} onClick={onLogout}>Logout</MenuItem>
-            </MenuGroup>
-        </MenuList>
-    </Menu>
+    <Menu.Root>
+        <Menu.Trigger asChild>
+            <IconButton
+                aria-label='Account'
+                fontSize={40}
+                rounded='full'
+                variant='ghost'
+            >
+                <MdAccountCircle />
+            </IconButton>
+        </Menu.Trigger>
+        <Menu.Positioner>
+            <Menu.Content color="black">
+                <Box px={3} py={2}>
+                    <Text fontSize={14} fontWeight='normal'>Username: {username}</Text>
+                </Box>
+                <Menu.Item value='logout' onClick={onLogout as () => void}>
+                    <MdLogout />
+                    Logout
+                </Menu.Item>
+            </Menu.Content>
+        </Menu.Positioner>
+    </Menu.Root>
 )
 export default LogoutControl
