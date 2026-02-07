@@ -1,13 +1,16 @@
-import { ComponentMeta, ComponentStory } from "@storybook/react"
+import type { Meta, StoryObj } from "@storybook/react"
 import MenuForDesktopComponent from "./MenuForDesktop";
 
-export default {
+const meta: Meta<typeof MenuForDesktopComponent> = {
     title: 'Todo/MenuForDesktop',
     component: MenuForDesktopComponent,
-} as ComponentMeta<typeof MenuForDesktopComponent>;
+};
+export default meta;
 
-const Template: ComponentStory<typeof MenuForDesktopComponent> = (args) => <MenuForDesktopComponent {...args}/>;
-export const MenuForDesktop = Template.bind({});
-MenuForDesktop.args = {
-    links: [{ text: "My Account", href: "/" }, { text: "Create Item", href: "/" }],
-}
+type Story = StoryObj<typeof MenuForDesktopComponent>;
+
+export const MenuForDesktop: Story = {
+    args: {
+        links: [{ text: "My Account", href: "/" }, { text: "Create Item", href: "/" }],
+    },
+};

@@ -1,7 +1,6 @@
 import * as React from 'react'
 
-import NextLink from 'next/link'
-import { Text, Link, Flex, Heading, Stack, Spacer } from '@chakra-ui/react'
+import { Flex, Heading, Spacer } from '@chakra-ui/react'
 import { signOut, useSession } from 'next-auth/react'
 import LogoutControl from './LogoutControl'
 import MenuForMobile from './MenuForMobile'

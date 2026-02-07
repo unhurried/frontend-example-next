@@ -1,4 +1,4 @@
-import { ComponentMeta, ComponentStory } from "@storybook/react"
+import type { Meta, StoryObj } from "@storybook/react"
 import FormComponent from "./Form"
 
 // TODO Declare enum here to avoid an error in importing client-axios in Storybook.
@@ -8,19 +8,22 @@ enum TodoCategoryEnum {
     Three = 'three'
 }
 
-export default {
+const meta: Meta<typeof FormComponent> = {
     title: 'Todo/Form',
     component: FormComponent,
-} as ComponentMeta<typeof FormComponent>;
+};
+export default meta;
 
-const Template: ComponentStory<typeof FormComponent> = (args) => <FormComponent {...args} />;
-export const Form = Template.bind({});
-Form.args = {
-    initialValues: {
-        id: "dummy",
-        title: "Buy milk after work",
-        category: TodoCategoryEnum.One,
-        content: "Remember to buy milk at the grocery store on the way home."
+type Story = StoryObj<typeof FormComponent>;
+
+export const Form: Story = {
+    args: {
+        initialValues: {
+            id: "dummy",
+            title: "Buy milk after work",
+            category: TodoCategoryEnum.One,
+            content: "Remember to buy milk at the grocery store on the way home."
+        },
+        onSubmit: () => {}
     },
-    onSubmit: () => {}
-}
+};

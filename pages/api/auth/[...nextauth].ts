@@ -1,6 +1,4 @@
 import NextAuth, { NextAuthOptions } from "next-auth"
-import { JWT } from "next-auth/jwt"
-import { env } from "../../../env/server.mjs";
 
 export const authOptions: NextAuthOptions = {
     providers: [{
@@ -8,7 +6,7 @@ export const authOptions: NextAuthOptions = {
         name: "oidc",
         type: "oauth",
         idToken: true,
-        wellKnown: env.OIDC_CONFIGURATION_EP,
+        wellKnown: process.env.OIDC_CONFIGURATION_EP,
         checks: ["pkce", "state"],
         clientId: "client_id_for_web",
         clientSecret: "client_secret_for_web",
@@ -26,7 +24,6 @@ export const authOptions: NextAuthOptions = {
         // Or when the token is updated on every session check (with only token parameter).
         jwt: async ({ token, account }) => {
             // Embed the user object in a token.
-            // TODO check the contents of account object.
             if (account) {
                 return {
                     sub: token.sub!,
@@ -46,16 +43,17 @@ export const authOptions: NextAuthOptions = {
         // Called when a redirect happens to verify the destination of the redirect.
         redirect: ({ url, baseUrl }) => {
             // Allow redirects only to this app or IDP.
-            const baseUrlForIdp = env.OIDC_BASE_URI
-            // TODO baseUrlForIdp!
-            if (url.startsWith(baseUrl) || url.startsWith(baseUrlForIdp!)) {
+            const baseUrlForIdp = process.env.OIDC_BASE_URI
+            if (baseUrlForIdp && url.startsWith(baseUrlForIdp)) {
                 return url
-            } else {
-                return baseUrl
             }
+            if (url.startsWith(baseUrl)) {
+                return url
+            }
+            return baseUrl
         }
     },
-    secret: env.NEXTAUTH_SECRET,
+    secret: process.env.NEXTAUTH_SECRET,
 }
 
 export default NextAuth(authOptions)
