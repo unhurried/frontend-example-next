@@ -1,0 +1,28 @@
+[09:33:55.623] [INFO] storybook v10.2.7
+[09:33:56.027] [DEBUG] Getting package.json info for /home/runner/work/frontend-example-next/frontend-example-next/package.json...
+[09:33:56.761] [INFO] Starting...
+[09:33:56.971] [DEBUG] Starting preview..
+[09:33:56.995] [INFO] Using implicit CSS loaders
+[09:33:57.166] [ERROR] Failed to build the preview
+[09:33:57.166] [ERROR] [38;2;241;97;97mError: Cannot find module 'ajv/dist/compile/codegen'
+Require stack:
+- ./node_modules/ajv-keywords/dist/definitions/typeof.js
+- ./node_modules/ajv-keywords/dist/keywords/typeof.js
+- ./node_modules/ajv-keywords/dist/keywords/index.js
+- ./node_modules/ajv-keywords/dist/index.js
+- ./node_modules/schema-utils/dist/validate.js
+- ./node_modules/schema-utils/dist/index.js
+- ./node_modules/webpack-dev-middleware/dist/index.js[39m
+    at Module.<anonymous> (node:internal/modules/cjs/loader:1421:15)
+    at ./node_modules/next/dist/server/require-hook.js:57:36
+    at defaultResolveImpl (node:internal/modules/cjs/loader:1059:19)
+    at resolveForCJSWithHooks (node:internal/modules/cjs/loader:1064:22)
+    at Module._load (node:internal/modules/cjs/loader:1227:37)
+    at TracingChannel.traceSync (node:diagnostics_channel:328:14)
+    at wrapModuleLoad (node:internal/modules/cjs/loader:245:24)
+    at Module.<anonymous> (node:internal/modules/cjs/loader:1504:12)
+    at mod.require (./node_modules/next/dist/server/require-hook.js:68:28)
+    at require (node:internal/modules/helpers:152:16)
+[09:33:57.169] [WARN] Broken build, fix the error above.
+You may need to refresh the browser.
+[09:33:57.173] [INFO] Storybook collects completely anonymous usage telemetry. We use it to shape Storybook's roadmap and prioritize features. You can learn more, including how to opt out, at https://storybook.js.org/telemetry
