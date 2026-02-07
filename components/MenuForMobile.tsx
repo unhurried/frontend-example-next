@@ -7,7 +7,7 @@ import { MdMenu, MdLogout } from 'react-icons/md'
 type Props = {
     username: string
     links: { "text": string, "href": string }[]
-    onLogout: React.MouseEventHandler<HTMLButtonElement>
+    onLogout: () => void
 }
 
 const MenuForMobile = ({ username, links, onLogout }: Props) => (
@@ -33,7 +33,7 @@ const MenuForMobile = ({ username, links, onLogout }: Props) => (
                 <Box px={3} py={2}>
                     <Text fontSize={14} fontWeight='normal'>Username: {username}</Text>
                 </Box>
-                <Menu.Item value='logout' onClick={onLogout as () => void}>
+                <Menu.Item value='logout' onClick={onLogout}>
                     <MdLogout />
                     Logout
                 </Menu.Item>

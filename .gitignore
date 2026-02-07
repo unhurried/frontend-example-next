@@ -42,3 +42,4 @@ yarn-error.log*
 
 db.sqlite
 db.sqlite-journal
+debug-storybook.log

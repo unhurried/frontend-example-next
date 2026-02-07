@@ -11,7 +11,7 @@ const Index = () => {
     const todoQuery = trpc.todo.getList.useQuery()
     const todoMutation = trpc.todo.delete.useMutation()
 
-    if (todoQuery.isError) return <>Something wrong happend.</>
+    if (todoQuery.isError) return <>Something wrong happened.</>
     if (!todoQuery.data) return <>Loading ...</>
 
     const todoItems: TodoForm[] = todoQuery.data.map<TodoForm>(item => {

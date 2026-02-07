@@ -5,7 +5,7 @@ import { MdAccountCircle, MdLogout } from 'react-icons/md'
 
 type Props = {
     username: string
-    onLogout: React.MouseEventHandler<HTMLButtonElement>
+    onLogout: () => void
 }
 
 const LogoutControl = ({ username, onLogout }: Props) => (
@@ -25,7 +25,7 @@ const LogoutControl = ({ username, onLogout }: Props) => (
                 <Box px={3} py={2}>
                     <Text fontSize={14} fontWeight='normal'>Username: {username}</Text>
                 </Box>
-                <Menu.Item value='logout' onClick={onLogout as () => void}>
+                <Menu.Item value='logout' onClick={onLogout}>
                     <MdLogout />
                     Logout
                 </Menu.Item>

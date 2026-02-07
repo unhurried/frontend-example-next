@@ -23,7 +23,7 @@ export default function EditTodo() {
         id: todoQuery.data.id,
         title: todoQuery.data.title,
         category: todoQuery.data.category,
-        content: todoQuery.data.content? todoQuery.data.content : "",
+        content: todoQuery.data.content ? todoQuery.data.content : "",
     }
 
     const onSubmit: FormikConfig<TodoForm>['onSubmit'] = async (values, actions) => {
