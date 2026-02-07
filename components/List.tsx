@@ -1,7 +1,8 @@
+"use client";
+
 import * as React from 'react'
 
-import { Table, Thead, Tbody, Tr, Th, Td, chakra, TableCaption, Tfoot, Button } from '@chakra-ui/react'
-import { Todo } from '@prisma/client'
+import { Button, TableBody, TableColumnHeader, TableHeader, TableRoot, TableRow, TableCell } from '@chakra-ui/react'
 import { TodoForm } from './Form'
 
 type Props = {
@@ -12,27 +13,27 @@ type Props = {
 
 const List = ({ items, onUpdate, onDelete}: Props) => (
     <>
-        <Table variant='striped' size='sm'>
-            <Thead>
-                <Tr>
-                    <Th>Category</Th>
-                    <Th>Title</Th>
-                    <Th>Action</Th>
-                </Tr>
-            </Thead>
-            <Tbody>
+        <TableRoot native variant='striped' size='sm'>
+            <TableHeader>
+                <TableRow>
+                    <TableColumnHeader>Category</TableColumnHeader>
+                    <TableColumnHeader>Title</TableColumnHeader>
+                    <TableColumnHeader>Action</TableColumnHeader>
+                </TableRow>
+            </TableHeader>
+            <TableBody>
                 {items.map((item) =>
-                    <Tr key={item.id}>
-                        <Td>{item.category}</Td>
-                        <Td>{item.title}</Td>
-                        <Td>
+                    <TableRow key={item.id}>
+                        <TableCell>{item.category}</TableCell>
+                        <TableCell>{item.title}</TableCell>
+                        <TableCell>
                             <Button size='sm' colorScheme='blue' right='2' onClick={() => onUpdate(item.id!)}>Update</Button>
                             <Button size='sm' colorScheme='red' onClick={() => onDelete(item.id!)}>Delete</Button>
-                        </Td>
-                    </Tr>
+                        </TableCell>
+                    </TableRow>
                 )}
-            </Tbody>
-        </Table>
+            </TableBody>
+        </TableRoot>
     </>
 )
 export default List

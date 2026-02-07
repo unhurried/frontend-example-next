@@ -1,11 +1,12 @@
+"use client";
+
 import * as React from 'react'
 
 import { Flex, Heading, Button } from '@chakra-ui/react'
-import { NextRouter } from 'next/router'
 
 type Props = {
     children: string
-    router?: NextRouter
+    router?: { push: (href: string) => void }
     buttons?: Array<{ title: string, href: string }>
 }
 

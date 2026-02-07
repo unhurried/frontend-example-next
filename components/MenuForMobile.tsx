@@ -1,35 +1,56 @@
+"use client";
+
 import * as React from 'react'
 
 import NextLink from 'next/link'
-import { Menu, MenuButton, MenuItem, IconButton, MenuList, MenuGroup, MenuDivider } from '@chakra-ui/react'
+import {
+    IconButton,
+    MenuContent,
+    MenuItem,
+    MenuItemGroup,
+    MenuItemGroupLabel,
+    MenuPositioner,
+    MenuRoot,
+    MenuSeparator,
+    MenuTrigger,
+} from '@chakra-ui/react'
 import { HamburgerIcon } from '@chakra-ui/icons'
 import { MdLogout } from 'react-icons/md'
 
 type Props = {
     username: string
     links: { "text": string, "href": string }[]
-    onLogout: React.MouseEventHandler<HTMLButtonElement>
+    onLogout: React.MouseEventHandler<HTMLElement>
 }
 
 const MenuForMobile = ({ username, links, onLogout }: Props) => (
-    <Menu>
-        <MenuButton
-            as={IconButton}
-            aria-label='Options'
-            icon={<HamburgerIcon />}
-            variant='outline'
-        />
-        <MenuList color="black">
-            { links.map((link, index) =>
-                <NextLink key={index} href={link.href}>
-                    <MenuItem>{link.text}</MenuItem>
-                </NextLink>
-            )}
-            <MenuDivider />
-            <MenuGroup title={`Username: ${username}`} fontSize={16} fontWeight={'normal'}>
-                <MenuItem icon={<MdLogout />} onClick={onLogout}>Logout</MenuItem>
-            </MenuGroup>
-        </MenuList>
-    </Menu>
+    <MenuRoot>
+        <MenuTrigger asChild>
+            <IconButton
+                aria-label='Options'
+                icon={<HamburgerIcon />}
+                variant='outline'
+            />
+        </MenuTrigger>
+        <MenuPositioner>
+            <MenuContent color="black">
+                {links.map((link, index) => (
+                    <MenuItem key={index} asChild>
+                        <NextLink href={link.href}>{link.text}</NextLink>
+                    </MenuItem>
+                ))}
+                <MenuSeparator />
+                <MenuItemGroup>
+                    <MenuItemGroupLabel fontSize={16} fontWeight={'normal'}>
+                        {`Username: ${username}`}
+                    </MenuItemGroupLabel>
+                    <MenuItem onClick={onLogout}>
+                        <MdLogout />
+                        Logout
+                    </MenuItem>
+                </MenuItemGroup>
+            </MenuContent>
+        </MenuPositioner>
+    </MenuRoot>
 )
 export default MenuForMobile
