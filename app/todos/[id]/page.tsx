@@ -15,7 +15,7 @@ const toaster = createToaster({ placement: "top" })
 export default function EditTodo() {
     const router = useRouter()
     const params = useParams()
-    const id = Array.isArray(params?.id) ? params?.id[0] : params?.id
+    const id = params && typeof params.id === "string" ? params.id : undefined
     const [todo, setTodo] = useState<TodoItem | null>(null)
     const [isLoading, setIsLoading] = useState(true)
     const [hasError, setHasError] = useState(false)
@@ -51,19 +51,22 @@ export default function EditTodo() {
 
     const onSubmit: FormikConfig<TodoForm>['onSubmit'] = async (values) => {
         if (!id) return
-        await updateTodo({
-            id,
-            title: values.title,
-            category: values.category,
-            content: values.content,
-        })
-        setTodo({
-            id,
-            title: values.title,
-            category: values.category,
-            content: values.content,
-        })
-        toaster.create({ title: "Update succeeded." })
+        try {
+            const updated = await updateTodo({
+                id,
+                title: values.title,
+                category: values.category,
+                content: values.content,
+            })
+            if (!updated) {
+                toaster.create({ title: "Update failed." })
+                return
+            }
+            setTodo(updated)
+            toaster.create({ title: "Update succeeded." })
+        } catch {
+            toaster.create({ title: "Update failed." })
+        }
     }
 
     return (

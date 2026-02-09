@@ -52,7 +52,7 @@ export const createTodo = async (input: TodoInput): Promise<TodoItem> => {
         data: {
             title: input.title,
             category: input.category,
-            content: input.content ? input.content : null,
+            content: input.content,
             userId,
         }
     })
@@ -60,18 +60,20 @@ export const createTodo = async (input: TodoInput): Promise<TodoItem> => {
     return toTodoItem(todo)
 }
 
-export const updateTodo = async (input: TodoInput & { id: string }) => {
+export const updateTodo = async (input: TodoInput & { id: string }): Promise<TodoItem | null> => {
     const userId = await requireUserId()
     await prisma.todo.updateMany({
         where: { id: input.id, userId },
         data: {
             title: input.title,
             category: input.category,
-            content: input.content ? input.content : null,
+            content: input.content,
         }
     })
+    const todo = await prisma.todo.findFirst({ where: { id: input.id, userId } })
     revalidatePath(`/todos/${input.id}`)
     revalidatePath("/todos")
+    return todo ? toTodoItem(todo) : null
 }
 
 export const deleteTodo = async (id: string) => {

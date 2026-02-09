@@ -1,11 +1,14 @@
 'use client'
 
 import { useCallback, useEffect, useState } from 'react'
+import { createToaster } from '@chakra-ui/react'
 import List from '../../components/List'
 import { useRouter } from 'next/navigation'
 import PageHeader from '../../components/PageHeader'
 import { deleteTodo, getTodoList } from './actions'
 import { TodoForm } from '../../components/Form'
+
+const toaster = createToaster({ placement: "top" })
 
 const Index = () => {
     const router = useRouter()
@@ -32,15 +35,13 @@ const Index = () => {
     const onUpdate = (id: string) => {
         router.push(`/todos/${id}`)
     }
-    const onDelete = (id: string) => {
-        (async () => {
-            try {
-                await deleteTodo(id)
-                setTodoItems((items) => items?.filter((item) => item.id !== id) ?? null)
-            } catch {
-                setHasError(true)
-            }
-        })()
+    const onDelete = async (id: string) => {
+        try {
+            await deleteTodo(id)
+            setTodoItems((items) => (items ? items.filter((item) => item.id !== id) : null))
+        } catch {
+            toaster.create({ title: "Delete failed." })
+        }
     }
 
     return (
