@@ -4,14 +4,14 @@ import { useRouter } from "next/navigation"
 import PageHeader from "../../../components/PageHeader"
 import Form, { TodoForm } from "../../../components/Form"
 import { FormikConfig } from "formik"
-import { trpc } from "../../../utils/trpc"
+
+import { createTodo } from "../actions"
 
 export default function CreateTodo() {
     const router = useRouter()
-    const todoCreate = trpc.todo.create.useMutation()
 
     const onSubmit: FormikConfig<TodoForm>['onSubmit'] = async (values) => {
-        const result = await todoCreate.mutateAsync({ title: values.title, category: values.category, content: values.content })
+        const result = await createTodo({ title: values.title, category: values.category, content: values.content })
         router.push(`/todos/${result.id}`)
     }
 

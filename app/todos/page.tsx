@@ -1,36 +1,47 @@
 'use client'
 
-import List from '../../components/List';
-import { useRouter } from 'next/navigation';
-import PageHeader from '../../components/PageHeader';
-import { trpc } from '../../utils/trpc';
-import { TodoForm } from '../../components/Form';
+import { useCallback, useEffect, useState } from 'react'
+import { createToaster } from '@chakra-ui/react'
+import List from '../../components/List'
+import { useRouter } from 'next/navigation'
+import PageHeader from '../../components/PageHeader'
+import { deleteTodo, getTodoList } from './actions'
+import { TodoForm } from '../../components/Form'
+
+const toaster = createToaster({ placement: "top" })
 
 const Index = () => {
     const router = useRouter()
-    const todoQuery = trpc.todo.getList.useQuery()
-    const todoMutation = trpc.todo.delete.useMutation()
+    const [todoItems, setTodoItems] = useState<TodoForm[] | null>(null)
+    const [hasError, setHasError] = useState(false)
 
-    if (todoQuery.isError) return <>Something wrong happened.</>
-    if (!todoQuery.data) return <>Loading ...</>
-
-    const todoItems: TodoForm[] = todoQuery.data.map<TodoForm>(item => {
-        return {
-            id: item.id,
-            title: item.title,
-            category: item.category,
-            content: item.content ? item.content : ""
+    const loadTodos = useCallback(async () => {
+        try {
+            const items = await getTodoList()
+            setTodoItems(items)
+            setHasError(false)
+        } catch {
+            setHasError(true)
         }
-    })
+    }, [])
+
+    useEffect(() => {
+        void loadTodos()
+    }, [loadTodos])
+
+    if (hasError) return <>Something wrong happened.</>
+    if (!todoItems) return <>Loading ...</>
 
     const onUpdate = (id: string) => {
         router.push(`/todos/${id}`)
     }
-    const onDelete = (id: string) => {
-        (async () => {
-            await todoMutation.mutateAsync(id)
-            todoQuery.refetch()
-        })()
+    const onDelete = async (id: string) => {
+        try {
+            await deleteTodo(id)
+            setTodoItems((items) => (items ? items.filter((item) => item.id !== id) : null))
+        } catch {
+            toaster.create({ title: "Delete failed." })
+        }
     }
 
     return (
